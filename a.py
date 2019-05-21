@@ -168,9 +168,13 @@ mlink=[]
 fl= []
 colorlist=[]
 colorpalette=[]
+fs=1
+lineh=11.5
+heights=[lineh]
+fontsizes=[1]
+ratioviolation=0
 
 if len(sys.argv) < 2:
-    print "Please give the path to the css/html file"
 	sys.exit()
 else:
 	file = 	sys.argv[1]
@@ -242,9 +246,11 @@ def parseSheet(sheet):
 	global sizecnt
 	global under12
 	global under16
+	
 	print "Analyzing fonts ..."
 	for rule in sheet:
-		
+		f=0
+		h=0
 		if rule.type == rule.STYLE_RULE:
         
 				for property in rule.style:
@@ -264,10 +270,14 @@ def parseSheet(sheet):
 						x = property.value
 						num = re.findall(r'\d+',x)
 						sizecnt+=1
-						if int(num[0]) < 16 and int(num[0])>=13:
+						
+						fs=int(num[0]) 
+						f=fs
+						#fontsizes.append(fs)
+						if fs < 16 and fs>=13:
 							under16+=1
 							
-						if int(num[0]) < 13:
+						if fs < 13:
 							under12+=1
 					if property.name == 'color' or property.name == 'background-color':
 
@@ -283,7 +293,19 @@ def parseSheet(sheet):
 							if z!=None:
 								if z not in colorlist:
 									colorlist.append(z)
-								
+
+					if property.name== "line-height":
+						x = property.value
+						
+						l = re.findall(r'\d+',x)
+						
+						if(len(l)==1):
+							lineh= int (l[0])
+							h=lineh
+							#heights.append(lineh)
+		if h!=0 and f!=0:
+			heights.append(h)
+			fontsizes.append(f)
 
 #Splits a RGB code into its component colors
 #in: str- color in string format
@@ -541,6 +563,7 @@ def parseCSSfile():
 
 	parseSheet(sheet)
 	colorProcess()
+
 	
 								
 # Parses attributes for information
@@ -549,44 +572,69 @@ def parseCSSfile():
 def parseStyleAtrib(list):
 	for a in list: 
 		if a.has_attr('style'):
-				st=a["style"].split(';')
-				for s in st:
-					if "font-family" in s:
-					
-						s= s.split(":")
-						x = s[1].split(",")
-						for i in x:
-							i= i.lstrip()
-							i= i.replace('"', '')
-							i= i.replace('\'', '')
-							i=i.capitalize()
-							r= findInXML(i)
-							if [i,r] not in fl:
-								fl.append([i,r])
-					if "color" in s:
+			f=0
+			h=0		
+			st=a["style"].split(';')
+			for s in st:
+				if "font-family" in s:
+				
+					s= s.split(":")
+					x = s[1].split(",")
+					for i in x:
+						i= i.lstrip()
+						i= i.replace('"', '')
+						i= i.replace('\'', '')
+						i=i.capitalize()
+						r= findInXML(i)
+						if [i,r] not in fl:
+							fl.append([i,r])
+				if "color" in s:
 
-						r= s.split(":")[1]
+					r= s.split(":")[1]
 						
-						r = normalizecolor(r)
-						if r not in colorlist:
+					r = normalizecolor(r)
+					if r not in colorlist:
 							
-							if "#" in r:
+						if "#" in r:
 								
-								colorlist.append(r)
-							else:
-								z=returncode(r)
-								if z!=None:
-									if r not in colorlist:
-										colorlist.append(z)
-					if 'font-size' in s:
-						x = s.split(":")[1]
-						num = re.findall(r'\d+',x)
-						sizecnt+=1
-						if int(num[0]) < 16:
-							under16+=1
-							
-						if int(num[0]) < 13:
-							under12+=1
+							colorlist.append(r)
+						else:
+							z=returncode(r)
+							if z!=None:
+								if r not in colorlist:
+									colorlist.append(z)
+				if 'font-size' in s:
+					x = s.split(":")[1]
+					num = re.findall(r'\d+',x)
+					sizecnt+=1
+					fs=int(num[0]) 
+					f=fs
+						#fontsizes.append(fs)
+					if fs < 16 and fs>=13:
+						under16+=1
+					if fs < 13:
+						under12+=1
+				if "line-height" in s:
+					x = s.split(":")[1]
+					l = re.findall(r'\d+',x)
+						
+					if(len(l)==1):
+						lineh= int (l[0])
+						h=lineh
+			if h!=0 and f!=0:
+				heights.append(h)
+				fontsizes.append(f)			
+				
+				
+				
+problempairs=[]
+def processheights():
+	global ratioviolation
+	for i in range(0, len(heights)):
+		if heights[i]/fontsizes[i]<1.4 or heights[i]/fontsizes[i]>1.6:
+			ratioviolation+=1
+			problempairs.append([heights[i], fontsizes[i]])
+						
 							
 classes=[]						
 #Parses html file, looks for info in different type of tags
@@ -657,6 +705,31 @@ def printReport():
 	worksheet.write(row , 0, "Rating of the fonts used: ", cell_format)
 	row+=1
 	
+	cell_format_info = workbook.add_format()
+	cell_format_info.set_bold(True)
+	#cell_format.set_font_color('red')
+	cell_format_info.set_font_size(10)
+	worksheet.write(row , 0, "5")
+	worksheet.write(row , 1, "Most desirable(eg.serif)", cell_format_info)
+	row+=1
+	worksheet.write(row , 0, "4")
+	worksheet.write(row , 1, "Desirable(eg. Times New Roman)", cell_format_info)
+	row+=1
+	worksheet.write(row , 0, "3")
+	worksheet.write(row , 1, "Neutral", cell_format_info)
+	row+=1
+	worksheet.write(row , 0, "2")
+	worksheet.write(row , 1, "Generally illegible(eg. script fonts)", cell_format_info)
+	row+=1
+	worksheet.write(row , 0, "1")
+	worksheet.write(row , 1, "Not a font(eg. wingbats)", cell_format_info)
+	row+=1
+	worksheet.write(row , 0, "0")
+	worksheet.write(row , 1, "Not found in database", cell_format_info)
+	row+=2
+	
+	
+
 	for [item,n] in fl :
 		worksheet.write(row, 0, item) 
 	
@@ -687,14 +760,22 @@ def printReport():
 	cell_format.set_bold(False)
 	#cell_format.set_font_color('red')
 	cell_format.set_font_size(12)
-	worksheet.write(row , 0, "The best size for body text is at least 16px and for secondary text is at least 13px", cell_format)	
+	worksheet.write(row , 0, "The best size for body text is at least 16px and for secondary text is at least 13px", cell_format_info)	
 	row +=1
 	worksheet.write(row , 1, "Classes with font-size under 16px" , cell_format)
 	worksheet.write(row, 0, str(under16)+"/"+ str(sizecnt))
 	row +=1
 	worksheet.write(row , 1, "Classes with font-size under 12px", cell_format)
 	worksheet.write(row, 0, str(under12)+"/"+ str(sizecnt))
+	row +=2
+	
+	worksheet.write(row , 0, "The ratio between font size and line height should be around 1.5", cell_format_info)
 	row +=1
+	worksheet.write(row , 0, ratioviolation , cell_format)
+	worksheet.write(row , 1, "Number of rule violation (ratio not between 1.4 and 1.6)", cell_format)
+	
+	row+=1
+	
 	row += 3
 	cell_format = workbook.add_format()
 
@@ -735,7 +816,7 @@ def printReport():
 	if len(classes)!=0:
 		worksheet.write(row, 0, "There are " + str(len(classes))+ " css classes in this html file")
 		row+=1
-		worksheet.write(row, 0, "If you don't find the information you are looking for, please run the script on the coresponding css file(s)")
+		worksheet.write(row, 0, "If you don't find the information you are looking for, please run the script on the coresponding css file(s)",cell_format_info)
 		
 	try:
 		workbook.close()
@@ -743,12 +824,17 @@ def printReport():
 	except:
 		print "Close the opened report and run the script again"
 
-	
+
+		
 if file.endswith(".css"):
 	parseCSSfile()
+	processheights()
 	printReport()
+
 elif file.endswith(".html"):
 	parseCSS()
+	processheights()
 	printReport()
+
 else: 
 	print "Please enter the path to a css/html file"
