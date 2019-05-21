@@ -171,11 +171,16 @@ colorpalette=[]
 
 if len(sys.argv) < 2:
     print "Please give the path to the css/html file"
+	sys.exit()
 else:
 	file = 	sys.argv[1]
 	
+try:
+	soup = BeautifulSoup(open(file), 'html.parser')	
+except:
+	print "No file found. Exiting script"
+	sys.exit()
 
-soup = BeautifulSoup(open(file), 'html.parser')	
 cssutils.log.setLevel(logging.CRITICAL)	
 tree = ET.parse('fonts.xml')
 root = tree.getroot()
@@ -259,7 +264,7 @@ def parseSheet(sheet):
 						x = property.value
 						num = re.findall(r'\d+',x)
 						sizecnt+=1
-						if int(num[0]) < 16:
+						if int(num[0]) < 16 and int(num[0])>=13:
 							under16+=1
 							
 						if int(num[0]) < 13:
@@ -322,20 +327,22 @@ def rgb_to_hsl(r, g, b):
 	high = max(r, g, b)
 	low = min(r, g, b)
    # h, s, v = ((high + low) / 2,)*3
-	l= (high + low) /2
+	l= (high + low) /2.0
 	d= high- low
 	if d==0:
 		h = 0.0
 		s = 0.0
 		return round(h), round(s*100), round(l*100)
 	else:
+	
 		if l<0.5:
 			s= d / (high + low)
 		else:
 			s = d / (2 - high - low) 	
-	if r==max:
+	if r==high:
+
 		h= (g - b) / d 
-	elif g ==max:
+	elif g ==high:
 		h= (b - r) / d + 2
 	else: 
 		h=(r - g) / d + 4
@@ -368,29 +375,16 @@ def hsl_to_rgb(h, s, l):
 	l=l/100
 	s=s/100
 	if s == 0:
-		r, g, b = l*255, l*255, l*255
-		r=hex(int(r))
+		r = l*255
+		r=hex(int(round(r,0)))
+
 		if int(r,16)<16:
 			
 			r= "0"+str(r)[2:]
 		else:
 			r= str(r)[2:]
-		
-		g=hex(int(g))
-		if int(g,16)<16:
-			
-			g= "0"+str(g)[2:]
-		else:
-			g= str(g)[2:]
-				
-		b=hex(int(b))
-		if int(b,16)<16:
-			
-			b= "0"+str(b)[2:]
-		else:
-			b= str(b)[2:]
-		
-		return "#"+r+g+b
+
+		return "#"+r+r+r
 	else:
 		if ( l< 0.5 ): 
 			var_2 = l * ( 1 + s )
@@ -402,22 +396,26 @@ def hsl_to_rgb(h, s, l):
 		h=h/360
 	
 		r =255* hue_to_rgb(var_1,var_2, h + 1.0/3)
-		g =255* hue_to_rgb(var_1,var_2, h)
-		b =255* hue_to_rgb(var_1,var_2,h - 1.0/3)
+		#print r
 		
-	r=hex(int(r))
+		g =255* hue_to_rgb(var_1,var_2, h)
+	#	print g
+		b =255* hue_to_rgb(var_1,var_2,h - 1.0/3)
+	#	print b
+	r=hex(int(round(r,0)))
+	
 	if int(r,16)<16:
 		r= "0"+str(r)[2:]
 	else:
 		r= str(r)[2:]
 		
-	g=hex(int(g))
+	g=hex(int(round(g,0)))
 	if int(g,16)<16:
 		g= "0"+str(g)[2:]
 	else:
 		g= str(g)[2:]
 			
-	b=hex(int(b))
+	b=hex(int(round(b,0)))
 	if int(b,16)<16:
 		b= "0"+str(b)[2:]
 	else:
@@ -467,10 +465,10 @@ def analogous(h):
 def colorProcess():
 	print "Analyzing the color palette..."
 	for c1 in range(len(colorlist)):
-
 		a, b, c = parsecolor(colorlist[c1])
 		
 		h, s, l = rgb_to_hsl(a,b,c)
+		
 	#	print h , s , l 
 		hc = complementary(h)
 		cc = hsl_to_rgb(hc, s, l)
@@ -496,7 +494,6 @@ def colorProcess():
 		
 		cc2 = hsl_to_rgb(sc2, s, l)
 	#	print cc2
-		
 		colorpalette.append(cc)
 		colorpalette.append(cc2)
 		
@@ -591,11 +588,15 @@ def parseStyleAtrib(list):
 						if int(num[0]) < 13:
 							under12+=1
 							
-							
+classes=[]						
 #Parses html file, looks for info in different type of tags
 # in: none
 # out:none
 def parseHTML():
+	for element in soup.find_all(class_=True): #find classes in html file
+		if element["class"] not in classes:
+			classes.append(element["class"])
+
 	l = soup.findAll('a')
 	parseStyleAtrib(l)
 	l = soup.findAll('div')
@@ -669,8 +670,8 @@ def printReport():
 
 	worksheet.write(row , 0, "Potential mistery meat links: ", cell_format)
 	row +=1
-	worksheet.write(row , 0, "Link", cell_format)	
-	worksheet.write(row , 1, "Link name", cell_format)
+	worksheet.write(row , 0, "Link")	
+	worksheet.write(row , 1, "Link name")
 	
 	row +=1
 	for [i,k] in mlink:
@@ -688,15 +689,20 @@ def printReport():
 	cell_format.set_font_size(12)
 	worksheet.write(row , 0, "The best size for body text is at least 16px and for secondary text is at least 13px", cell_format)	
 	row +=1
-	worksheet.write(row , 0, "Classes with font-size under 16px:" , cell_format)
-	worksheet.write(row, 1, str(under16)+"/"+ str(sizecnt))
+	worksheet.write(row , 1, "Classes with font-size under 16px" , cell_format)
+	worksheet.write(row, 0, str(under16)+"/"+ str(sizecnt))
 	row +=1
-	worksheet.write(row , 0, "Classes with font-size under 12px:", cell_format)
-	worksheet.write(row, 1, str(under12)+"/"+ str(sizecnt))
-	
+	worksheet.write(row , 1, "Classes with font-size under 12px", cell_format)
+	worksheet.write(row, 0, str(under12)+"/"+ str(sizecnt))
+	row +=1
 	row += 3
-	worksheet.write(row , 0, "Colors used:", cell_format)
-	worksheet.write(row , 1, "Complementaries:", cell_format)
+	cell_format = workbook.add_format()
+
+	cell_format.set_font_size(15)
+	worksheet.write(row , 0, "Report on colors: ", cell_format)
+	row +=1
+	worksheet.write(row , 0, "Colors used:")
+	worksheet.write(row , 2, "Suggested color palettes: complementary, split-complementary, triadic, analogous")
 	row +=1
 	
 	for k in range(0,len(colorlist)):
@@ -726,7 +732,11 @@ def printReport():
 		cpcouner+=8
 		
 		row+=1
-	
+	if len(classes)!=0:
+		worksheet.write(row, 0, "There are " + str(len(classes))+ " css classes in this html file")
+		row+=1
+		worksheet.write(row, 0, "If you don't find the information you are looking for, please run the script on the coresponding css file(s)")
+		
 	try:
 		workbook.close()
 		print "Report completed"
