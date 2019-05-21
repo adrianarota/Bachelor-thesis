@@ -250,6 +250,8 @@ def parseSheet(sheet):
 						for i in x:
 							i= i.lstrip()
 							i= i.replace('"', '')
+							i= i.replace('\'', '')
+							i=i.capitalize()
 							r= findInXML(i)
 							if [i,r] not in fl:
 								fl.append([i,r])
@@ -307,7 +309,7 @@ def parsecolor(str):
 def findDifference(str1, str2):
 	a1, b1, c1 = parsecolor(str1)
 	a2, b2, c2 = parsecolor(str2)
-	return math.sqrt(@*(a2-a1)**2+4*(b2-b1)**2+3*(c2-c1)**2)
+	return math.sqrt(2*(a2-a1)**2+4*(b2-b1)**2+3*(c2-c1)**2)
 
 
 #Transforms RGB to HST format
@@ -452,7 +454,7 @@ def triadic(h):
 #Generates analogous color palette
 # in: h- hue
 # out: h1, h2, h3 -generated hues from h
-def analagous(h):
+def analogous(h):
 	h1 = abs(h +30-360)
 	h2 =abs(h +60-360)
 	h3 =abs(h +90-360)	
@@ -486,6 +488,30 @@ def colorProcess():
 		
 		colorpalette.append(cc)
 		colorpalette.append(cc2)
+		
+		sc, sc2 = triadic(h)
+		
+		cc = hsl_to_rgb(sc, s, l)
+	#	print cc
+		
+		cc2 = hsl_to_rgb(sc2, s, l)
+	#	print cc2
+		
+		colorpalette.append(cc)
+		colorpalette.append(cc2)
+		
+		sc, sc2, sc3 = analogous(h)
+		
+		cc = hsl_to_rgb(sc, s, l)
+	#	print cc
+		
+		cc2 = hsl_to_rgb(sc2, s, l)
+	#	print cc2
+		cc3 = hsl_to_rgb(sc3, s, l)
+		
+		colorpalette.append(cc)
+		colorpalette.append(cc2)
+		colorpalette.append(cc3)
 
 
 
@@ -502,9 +528,9 @@ def parseCSS():
 		x= x.replace('<style type="text/css">','')
 		sheet = cssutils.parseString(x)
 		parseSheet(sheet)
-		parseHTML()
-		findMysteryLink()
-		colorProcess()				
+	parseHTML()
+	findMysteryLink()
+	colorProcess()				
 
 		
 #Parses CSS file
@@ -535,11 +561,13 @@ def parseStyleAtrib(list):
 						for i in x:
 							i= i.lstrip()
 							i= i.replace('"', '')
+							i= i.replace('\'', '')
+							i=i.capitalize()
 							r= findInXML(i)
 							if [i,r] not in fl:
 								fl.append([i,r])
-					if "color" or "background-color" in s:
-					
+					if "color" in s:
+
 						r= s.split(":")[1]
 						
 						r = normalizecolor(r)
@@ -578,7 +606,6 @@ def parseHTML():
 	parseStyleAtrib(l)
 	l = soup.findAll('body')
 	parseStyleAtrib(l)
-			
 
 #Looks for "mistery meat" links in html files using keywords
 # in: none
@@ -686,7 +713,7 @@ def printReport():
 		worksheet.write(row, 0, colorlist[k], cell_format)
 		cell_format = workbook.add_format()
 		
-		for j in range (0,3):
+		for j in range (0,8):
 			cell_format_cp = workbook.add_format()
 			
 			cell_format_cp.set_bg_color(colorpalette[cpcouner+j])
@@ -696,7 +723,7 @@ def printReport():
 				cell_format_cp.set_font_color('white')
 			worksheet.write(row, 2+j, colorpalette[cpcouner+j], cell_format_cp)
 		
-		cpcouner+=3
+		cpcouner+=8
 		
 		row+=1
 	

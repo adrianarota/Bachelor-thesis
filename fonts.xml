@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Fonts>
-	 <Font name="Adobe Jenson"> </Font>
+	 <Font name="Adobe Jenson" desirability = "4"> </Font>
       <Font name="Albertus" desirability = "4"></Font>
       <Font name="Aldus" desirability = "4"></Font>
       <Font name="Alexandria" desirability = "4"></Font>
@@ -121,7 +121,308 @@
       <Font name="Windsor" desirability = "4"></Font>
       <Font name="XITS" desirability = "4"></Font>
 	  
-	  <Font name = "verdana" desirability = "5"></Font>
-    	<Font name = "serif" desirability = "5"></Font>
-	<Font name = "Arial" desirability = "5"></Font>
+
+      <Font name="Alexandria" desirability = "4"></Font>
+      <Font name="American Typewriter" desirability = "4"></Font>
+      <Font name="Archer" desirability = "4"></Font>
+      <Font name="Athens" desirability = "4"></Font>
+      <Font name="Candida" desirability = "4"></Font>
+      <Font name="Cholla Slab" desirability = "4"></Font>
+      <Font name="City" desirability = "4"></Font>
+      <Font name="Clarendon" desirability = "4"></Font>
+      <Font name="Concrete Roman" desirability = "4"></Font>
+      <Font name="Courier" desirability = "4"></Font>
+      <Font name="Egyptienne" desirability = "4"></Font>
+      <Font name="Guardian Egyptian" desirability = "4"></Font>
+      <Font name="Ionic No. 5" desirability = "4"></Font>
+      <Font name="Lexia" desirability = "4"></Font>
+      <Font name="Memphis" desirability = "4"></Font>
+      <Font name="Nilland" desirability = "4"></Font>
+      <Font name="Roboto Slab" desirability = "4"></Font>
+      <Font name="Rockwell" desirability = "4"></Font>
+      <Font name="Schadow" desirability = "4"></Font>
+      <Font name="Serifa" desirability = "4"></Font>
+      <Font name="Skeleton Antique" desirability = "4"></Font>
+      <Font name="Tower" desirability = "4"></Font>
+
+      <Font name="Agency FB" desirability = "5"></Font>
+      <Font name="Akzidenz-Grotesk" desirability = "5"></Font>
+      <Font name="Andalé Sans" desirability = "5"></Font>
+      <Font name="Antique Olive" desirability = "5"></Font>
+      <Font name="Arial" desirability = "5"></Font>
+      <Font name="Arial Unicode MS" desirability = "5"></Font>
+      <Font name="Avant Garde Gothic" desirability = "5"></Font>
+      <Font name="Avenir" desirability = "5"></Font>
+      <Font name="Bank Gothic" desirability = "5"></Font>
+      <Font name="Bauhaus" desirability = "5"></Font>
+      <Font name="Bell Centennial" desirability = "5"></Font>
+      <Font name="Bell Gothic" desirability = "5"></Font>
+      <Font name="Benguiat Gothic" desirability = "5"></Font>
+      <Font name="Berlin Sans" desirability = "5"></Font>
+      <Font name="Brandon Grotesque" desirability = "5"></Font>
+      <Font name="Calibri" desirability = "5"></Font>
+      <Font name="Casey" desirability = "5"></Font>
+      <Font name="Century Gothic" desirability = "5"></Font>
+      <Font name="Charcoal" desirability = "5"></Font>
+      <Font name="Chicago" desirability = "5"></Font>
+      <Font name="Clearview" desirability = "5"></Font>
+      <Font name="Comic Sans" desirability = "5"></Font>
+      <Font name="Compacta" desirability = "5"></Font>
+      <Font name="Corbel" desirability = "5"></Font>
+      <Font name="DejaVu Sans" desirability = "5"></Font>
+      <Font name="DIN" desirability = "5"></Font>
+      <Font name="Dotum" desirability = "5"></Font>
+      <Font name="Droid Sans" desirability = "5"></Font>
+      <Font name="Dyslexie" desirability = "5"></Font>
+      <Font name="Ecofont" desirability = "5"></Font>
+      <Font name="Eras" desirability = "5"></Font>
+      <Font name="Esseltub" desirability = "5"></Font>
+      <Font name="Espy Sans" desirability = "5"></Font>
+      <Font name="Eurocrat" desirability = "5"></Font>
+      <Font name="Eurostile" desirability = "5"></Font>
+      <Font name="Square 721" desirability = "5"></Font>
+      <Font name="FF Dax" desirability = "5"></Font>
+      <Font name="FF Meta*" desirability = "5"></Font>
+      <Font name="FF Scala Sans" desirability = "5"></Font>
+      <Font name="Fira Sans" desirability = "5"></Font>
+      <Font name="Fira Mono" desirability = "5"></Font>
+      <Font name="Fira Code" desirability = "5"></Font>
+      <Font name="Fira Go" desirability = "5"></Font>
+      <Font name="Folio" desirability = "5"></Font>
+      <Font name="Franklin Gothic" desirability = "5"></Font>
+      <Font name="FreeSans" desirability = "5"></Font>
+      <Font name="Frutiger" desirability = "5"></Font>
+      <Font name="Futura" desirability = "5"></Font>
+      <Font name="Geneva" desirability = "5"></Font>
+      <Font name="Gill Sans*" desirability = "5"></Font>
+      <Font name="Gill Sans Schoolbook" desirability = "5"></Font>
+      <Font name="Gotham*" desirability = "5"></Font>
+      <Font name="Haettenschweiler" desirability = "5"></Font>
+      <Font name="Handel Gothic" desirability = "5"></Font>
+      <Font name="Hei" desirability = "5"></Font>
+      <Font name="Helvetica" desirability = "5"></Font>
+      <Font name="Helvetica Neue" desirability = "5"></Font>
+      <Font name="Swiss 721" desirability = "5"></Font>
+      <Font name="Highway Gothic" desirability = "5"></Font>
+      <Font name="Hobo" desirability = "5"></Font>
+      <Font name="IBM Plex Sans" desirability = "5"></Font>
+      <Font name="Impact" desirability = "5"></Font>
+      <Font name="Industria" desirability = "5"></Font>
+      <Font name="Interstate" desirability = "5"></Font>
+      <Font name="Johnston/New Johnston" desirability = "5"></Font>
+      <Font name="Kabel" desirability = "5"></Font>
+      <Font name="Klavika" desirability = "5"></Font>
+      <Font name="Lato" desirability = "5"></Font>
+      <Font name="Liberation Sans" desirability = "5"></Font>
+      <Font name="Linux Biolinum" desirability = "5"></Font>
+      <Font name="Lucida Sans" desirability = "5"></Font>
+      <Font name="Lucida Grande" desirability = "5"></Font>
+      <Font name="Lucida Sans Unicode" desirability = "5"></Font>
+      <Font name="Lydian" desirability = "5"></Font>
+      <Font name="Meiryo" desirability = "5"></Font>
+      <Font name="Meta" desirability = "5"></Font>
+      <Font name="Microgramma" desirability = "5"></Font>
+      <Font name="Modern" desirability = "5"></Font>
+      <Font name="Motorway" desirability = "5"></Font>
+      <Font name="MS Sans Serif" desirability = "5"></Font>
+      <Font name="Myriad" desirability = "5"></Font>
+      <Font name="Neutraface" desirability = "5"></Font>
+      <Font name="Neuzeit S" desirability = "5"></Font>
+      <Font name="News Gothic" desirability = "5"></Font>
+      <Font name="Nimbus Sans L" desirability = "5"></Font>
+      <Font name="Nordstern" desirability = "5"></Font>
+      <Font name="Open Sans" desirability = "5"></Font>
+      <Font name="Optima" desirability = "5"></Font>
+      <Font name="Overpass" desirability = "5"></Font>
+      <Font name="Parisine" desirability = "5"></Font>
+      <Font name="Product Sans" desirability = "5"></Font>
+      <Font name="Proxima Nova" desirability = "5"></Font>
+      <Font name="PT Sans" desirability = "5"></Font>
+      <Font name="Rail Alphabet" desirability = "5"></Font>
+      <Font name="Roboto" desirability = "5"></Font>
+      <Font name="Rotis Sans" desirability = "5"></Font>
+      <Font name="San Francisco" desirability = "5"></Font>
+      <Font name="Segoe UI" desirability = "5"></Font>
+      <Font name="Skia" desirability = "5"></Font>
+      <Font name="Source Sans Pro" desirability = "5"></Font>
+      <Font name="Sweden Sans" desirability = "5"></Font>
+      <Font name="Syntax" desirability = "5"></Font>
+      <Font name="System" desirability = "5"></Font>
+      <Font name="Tahoma" desirability = "5"></Font>
+      <Font name="Template Gothic" desirability = "5"></Font>
+      <Font name="Thesis Sans*" desirability = "5"></Font>
+      <Font name="Tiresias" desirability = "5"></Font>
+      <Font name="Trade Gothic" desirability = "5"></Font>
+      <Font name="Transport" desirability = "5"></Font>
+      <Font name="Trebuchet MS" desirability = "5"></Font>
+      <Font name="Twentieth Century" desirability = "5"></Font>
+      <Font name="Ubuntu" desirability = "5"></Font>
+      <Font name="Unica" desirability = "5"></Font>
+      <Font name="Univers" desirability = "5"></Font>
+      <Font name="Zurich" desirability = "5"></Font>
+      <Font name="Vera Sans" desirability = "5"></Font>
+      <Font name="Verdana" desirability = "5"></Font>
+      <Font name="Nyala" desirability = "5"></Font>
+      <Font name="Rotis Semi Serif" desirability = "5"></Font>
+      <Font name="Easyreading" desirability = "5"></Font>
+      <Font name="Andalé Mono" desirability = "5"></Font>
+      <Font name="Arial Monospaced" desirability = "5"></Font>
+      <Font name="Bitstream Vera" desirability = "5"></Font>
+      <Font name="Consolas" desirability = "5"></Font>
+      <Font name="Courier" desirability = "5"></Font>
+      <Font name="Courier New" desirability = "5"></Font>
+      <Font name="DejaVu Sans Mono" desirability = "5"></Font>
+      <Font name="Droid Sans Mono" desirability = "5"></Font>
+      <Font name="Everson Mono" desirability = "5"></Font>
+      <Font name="Fira Mono" desirability = "5"></Font>
+      <Font name="Fira Code" desirability = "5"></Font>
+      <Font name="Fixed" desirability = "5"></Font>
+      <Font name="Fixedsys" desirability = "5"></Font>
+      <Font name="Fixedsys Excelsior" desirability = "5"></Font>
+      <Font name="HyperFont" desirability = "5"></Font>
+      <Font name="IBM Plex Mono*" desirability = "5"></Font>
+      <Font name="Inconsolata" desirability = "5"></Font>
+      <Font name="Letter Gothic" desirability = "5"></Font>
+      <Font name="Liberation Mono" desirability = "5"></Font>
+      <Font name="Lucida Console*" desirability = "5"></Font>
+      <Font name="Lucida Sans Typewriter*" desirability = "5"></Font>
+      <Font name="Lucida Typewriter*" desirability = "5"></Font>
+      <Font name="Menlo" desirability = "5"></Font>
+      <Font name="MICR" desirability = "5"></Font>
+      <Font name="Monaco" desirability = "5"></Font>
+      <Font name="Monospace" desirability = "5"></Font>
+      <Font name="MS Gothic" desirability = "5"></Font>
+      <Font name="MS Mincho" desirability = "5"></Font>
+      <Font name="Nimbus Mono L" desirability = "5"></Font>
+      <Font name="OCR-A" desirability = "5"></Font>
+      <Font name="OCR-B" desirability = "5"></Font>
+      <Font name="PragmataPro" desirability = "5"></Font>
+      <Font name="Prestige Elite" desirability = "5"></Font>
+      <Font name="ProFont" desirability = "5"></Font>
+      <Font name="SimHei" desirability = "5"></Font>
+      <Font name="SimSun" desirability = "5"></Font>
+      <Font name="Source Code Pro" desirability = "5"></Font>
+      <Font name="Terminal" desirability = "5"></Font>
+      <Font name="Ubuntu Mono" desirability = "5"></Font>
+      <Font name="Vera Sans Mono" desirability = "5"></Font>
+      <Font name="Brush scripts" desirability = "2"></Font>
+      <Font name="Balloon" desirability = "2"></Font>
+      <Font name="Brush Script" desirability = "2"></Font>
+      <Font name="Choc" desirability = "2"></Font>
+      <Font name="Dom Casual" desirability = "2"></Font>
+      <Font name="Mistral" desirability = "2"></Font>
+      <Font name="Papyrus" desirability = "2"></Font>
+      <Font name="Segoe Script" desirability = "2"></Font>
+      <Font name="Utopia" desirability = "2"></Font>
+
+      <Font name="American Scribe" desirability = "2"></Font>
+      <Font name="AMS Euler" desirability = "2"></Font>
+      <Font name="Apple Chancery" desirability = "2"></Font>
+      <Font name="Forte" desirability = "2"></Font>
+      <Font name="French Script" desirability = "2"></Font>
+      <Font name="ITC Zapf Chancery" desirability = "2"></Font>
+      <Font name="Kuenstler Script" desirability = "2"></Font>
+      <Font name="Monotype Corsiva" desirability = "2"></Font>
+      <Font name="Old English Text MT" desirability = "2"></Font>
+      <Font name="Zapfino" desirability = "2"></Font>
+
+      <Font name="Andy" desirability = "2"></Font>
+      <Font name="Ashley Script" desirability = "2"></Font>
+      <Font name="Cézanne" desirability = "2"></Font>
+      <Font name="Chalkboard" desirability = "2"></Font>
+      <Font name="Comic Sans MS" desirability = "2"></Font>
+      <Font name="Dom Casual" desirability = "2"></Font>
+      <Font name="Kristen" desirability = "2"></Font>
+      <Font name="Lucida Handwriting" desirability = "2"></Font>
+
+      <Font name="Coronet" desirability = "2"></Font>
+      <Font name="Curlz" desirability = "2"></Font>
+      <Font name="Gravura" desirability = "2"></Font>
+      <Font name="Script" desirability = "2"></Font>
+      <Font name="Wiesbaden Swing" desirability = "2"></Font>
+
+      <Font name="Bastard" desirability = "2"></Font>
+      <Font name="Breitkopf Fraktur" desirability = "2"></Font>
+      <Font name="Cloister Black" desirability = "2"></Font>
+      <Font name="Fette Fraktur" desirability = "2"></Font>
+      <Font name="Fletcher" desirability = "2"></Font>
+      <Font name="Fraktur" desirability = "2"></Font>
+      <Font name="Lucida Blackletter" desirability = "2"></Font>
+      <Font name="Old English Text" desirability = "2"></Font>
+      <Font name="Schwabacher" desirability = "2"></Font>
+
+      <Font name="Alphabetum" desirability = "3"></Font>
+      <Font name="Arial Unicode MS" desirability = "3"></Font>
+      <Font name="Batang and Gungsuh" desirability = "3"></Font>
+      <Font name="Bitstream Cyberbit" desirability = "3"></Font>
+      <Font name="Bitstream Vera" desirability = "3"></Font>
+      <Font name="Charis SIL" desirability = "3"></Font>
+      <Font name="Code2000" desirability = "3"></Font>
+      <Font name="Code2001" desirability = "3"></Font>
+      <Font name="Code2002" desirability = "3"></Font>
+      <Font name="DejaVu fonts" desirability = "3"></Font>
+      <Font name="Doulos SIL" desirability = "3"></Font>
+      <Font name="EB Garamond" desirability = "3"></Font>
+      <Font name="Everson Mono" desirability = "3"></Font>
+      <Font name="Fallback font" desirability = "3"></Font>
+      <Font name="Fixedsys Excelsior" desirability = "3"></Font>
+      <Font name="Gentium" desirability = "3"></Font>
+      <Font name="GNU Unifont" desirability = "3"></Font>
+      <Font name="Georgia Ref" desirability = "3"></Font>
+      <Font name="Gulim" desirability = "3"></Font>
+      <Font name="Junicode" desirability = "3"></Font>
+      <Font name="Kelvinch" desirability = "3"></Font>
+      <Font name="LastResort" desirability = "3"></Font>
+      <Font name="Lucida Grande" desirability = "3"></Font>
+      <Font name="Lucida Sans Unicode" desirability = "3"></Font>
+      <Font name="MS Gothic" desirability = "3"></Font>
+      <Font name="MS Mincho" desirability = "3"></Font>
+      <Font name="Nimbus Sans Global" desirability = "3"></Font>
+      <Font name="Noto" desirability = "3"></Font>
+      <Font name="PragmataPro" desirability = "3"></Font>
+      <Font name="STIX" desirability = "3"></Font>
+      <Font name="Titus Cyberbit Basic" desirability = "3"></Font>
+      <Font name="Verdana Ref" desirability = "3"></Font>
+      <Font name="XITS" desirability = "3"></Font>
+
+      <Font name="Apple Symbols" desirability = "1"></Font>
+      <Font name="Asana-Math" desirability = "1"></Font>
+      <Font name="Blackboard bold" desirability = "1"></Font>
+      <Font name="Bookshelf Symbol 7" desirability = "1"></Font>
+      <Font name="Cambria Math" desirability = "1"></Font>
+      <Font name="Computer Modern" desirability = "1"></Font>
+      <Font name="Lucida Math" desirability = "1"></Font>
+      <Font name="Marlett" desirability = "1"></Font>
+      <Font name="Symbol" desirability = "1"></Font>
+      <Font name="Webdings" desirability = "1"></Font>
+      <Font name="Wingdings" desirability = "1"></Font>
+      <Font name="Wingdings 2" desirability = "1"></Font>
+      <Font name="Wingdings 3" desirability = "1"></Font>
+      <Font name="Zapf Dingbats" desirability = "1"></Font>
+
+      <Font name="Ad Lib" desirability = "2"></Font>
+      <Font name="Allegro" desirability = "2"></Font>
+      <Font name="Andreas" desirability = "2"></Font>
+      <Font name="Arnold Böcklin" desirability = "2"></Font>
+      <Font name="Astur" desirability = "2"></Font>
+      <Font name="Banco" desirability = "2"></Font>
+      <Font name="Bauhaus" desirability = "2"></Font>
+      <Font name="Braggadocio" desirability = "2"></Font>
+      <Font name="Broadway" desirability = "2"></Font>
+      <Font name="Caslon Antique" desirability = "2"></Font>
+      <Font name="Cooper Black" desirability = "2"></Font>
+      <Font name="Curlz" desirability = "2"></Font>
+      <Font name="Ellington" desirability = "2"></Font>
+      <Font name="Exocet" desirability = "2"></Font>
+      <Font name="FIG Script" desirability = "2"></Font>
+      <Font name="Forte" desirability = "2"></Font>
+      <Font name="Gabriola" desirability = "2"></Font>
+      <Font name="Horizon" desirability = "2"></Font>
+      <Font name="Jim Crow" desirability = "2"></Font>
+      <Font name="Lo-Type" desirability = "2"></Font>
+      <Font name="Neuland" desirability = "2"></Font>
+      <Font name="Peignot" desirability = "2"></Font>
+      <Font name="San Francisco" desirability = "2"></Font>
+      <Font name="Stencil" desirability = "2"></Font>
+
 </Fonts>
