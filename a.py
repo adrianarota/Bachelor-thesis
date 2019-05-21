@@ -161,15 +161,15 @@ colorStrings=[["AliceBlue" , "#F0F8FF"],
 ["Yellow" , "#FFFF00"],
 ["YellowGreen" , "#9ACD32"]]
 
-
+#Finds the longest substring between 2 strings and returns it if it's longer than 2/3 of the first one
+#in: str1, str2 -strings
+#out: string or None
 def longestSubstring(str1,str2): 
 	seqMatch = SequenceMatcher(None,str1.lower(),str2.lower()) 
 	match = seqMatch.find_longest_match(0, len(str1), 0, len(str2))
 	if (match.size>=len(str1)*2/3):
-	#	print (str1[match.a: match.a + match.size])
 		return (str1[match.a: match.a + match.size])
 	else:
-	#	print ('No longest common sub-string found' ) 
 		return (None )
 
 
