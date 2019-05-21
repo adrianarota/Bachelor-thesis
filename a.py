@@ -161,6 +161,26 @@ colorStrings=[["AliceBlue" , "#F0F8FF"],
 ["Yellow" , "#FFFF00"],
 ["YellowGreen" , "#9ACD32"]]
 
+under12=0
+under16=0
+sizecnt=0
+mlink=[]
+fl= []
+colorlist=[]
+colorpalette=[]
+
+if len(sys.argv) < 2:
+    print "Please give the path to the css/html file"
+else:
+	file = 	sys.argv[1]
+	
+
+soup = BeautifulSoup(open(file), 'html.parser')	
+cssutils.log.setLevel(logging.CRITICAL)	
+tree = ET.parse('fonts.xml')
+root = tree.getroot()
+
+
 #Finds the longest substring between 2 strings and returns it if it's longer than 2/3 of the first one
 #in: str1, str2 -strings
 #out: string or None
@@ -171,28 +191,11 @@ def longestSubstring(str1,str2):
 		return (str1[match.a: match.a + match.size])
 	else:
 		return (None )
+		
 
-
-cssutils.log.setLevel(logging.CRITICAL)
-	
-tree = ET.parse('fonts.xml')
-root = tree.getroot()
-under12=0
-under16=0
-sizecnt=0
-mlink=[]
-mlinkname=[]	
-fl= []
-sl= []
-colorlist=[]
-colorpalette=[]
-
-if len(sys.argv) < 2:
-    print "Please give the path to the css/html file"
-else:
-	file = 	sys.argv[1]
-	
-
+#Find the desirability value for a font
+# in: font - font name
+#out: int value that represents the font's desirability, or 0 if not found
 def findInXML(font):
 	nodes = tree.find('.//Font[@name="'+font+'"]')
 	if nodes!= None:
@@ -200,8 +203,11 @@ def findInXML(font):
 		return(x)
 	else:
 		return(0)
+		
 
-
+#Find the code for a specific standard color 
+# in: color - color name
+#out: string value that represents the color's code
 def returncode(color):
 	
 	for l in colorStrings:
@@ -209,11 +215,14 @@ def returncode(color):
 			return l[1]
 	return None
 				
-soup = BeautifulSoup(open(file), 'html.parser')
+
+#Fixes color format mistakes
+# in: str - color string format
+#out: string value with 2 bytes for each component	
 def normalizecolor(str):
 		
 		if len(str)==4:
-			print str
+			
 			str=str[1:]
 			out = [(str[i:i+1]) for i in range(0, len(str))]	
 			for i in range(0,3):
@@ -222,6 +231,8 @@ def normalizecolor(str):
 			return "#"+ out[0]+out[1]+out[2]
 		else:
 			return str
+			
+
 def parseSheet(sheet):
 	global sizecnt
 	global under12
@@ -235,7 +246,7 @@ def parseSheet(sheet):
 					if property.name == 'font-family':
 						
 						x = property.value.split(",")
-						print x
+					
 						for i in x:
 							i= i.lstrip()
 							i= i.replace('"', '')
@@ -251,21 +262,25 @@ def parseSheet(sheet):
 							
 						if int(num[0]) < 13:
 							under12+=1
-					if property.name == 'color':
-						print property
+					if property.name == 'color' or property.name == 'background-color':
+
 						if "#" in property.value:
 							#r = property.value
 							r=normalizecolor(property.value)
+							
 							if r not in colorlist:
+								
 								colorlist.append(r.strip())
 						else:
 							z=returncode(property.value)
 							if z!=None:
-								if property.value not in colorlist:
+								if z not in colorlist:
 									colorlist.append(z)
 								
 
-
+#Splits a RGB code into its component colors
+#in: str- color in string format
+#out: r, g, b- int color values
 def parsecolor(str):
 
 	#print str
@@ -285,15 +300,19 @@ def parsecolor(str):
 		b=0	
 	return r , g, b
 
-	
+
+#Difference between 2 colors
+# in: str1, str2 - 2 colors in string format
+#out: Euclidian difference	
 def findDifference(str1, str2):
 	a1, b1, c1 = parsecolor(str1)
 	a2, b2, c2 = parsecolor(str2)
-	return math.sqrt((a2-a1)**2+(b2-b1)**2+(c2-c1)**2)
+	return math.sqrt(@*(a2-a1)**2+4*(b2-b1)**2+3*(c2-c1)**2)
 
 
-
-
+#Transforms RGB to HST format
+# in: r, g, b - values to transform
+#out: h, s, l - transformed values		
 def rgb_to_hsl(r, g, b):
 	r=float(r)/255
 	g=float(g)/255
@@ -325,6 +344,9 @@ def rgb_to_hsl(r, g, b):
 
 	return round(h), round(s*100), round(l*100)
 
+#Helper function for transformation between HSL and RGB format
+# in: p, q, hue - values needed 
+#out: hue for the given color			
 def hue_to_rgb(p, q, hue):
 		
         if hue < 0:
@@ -335,7 +357,11 @@ def hue_to_rgb(p, q, hue):
         if hue*2 < 1: return q
         if hue*3 < 2: return p + (q - p) * (2.0/3 - hue) * 6
         return p
-		
+
+
+#Transforms HSL to RGB format
+# in: h, s, l - values to transform
+#out: r, g, b - transformed values		
 def hsl_to_rgb(h, s, l):
 	l=l/100
 	s=s/100
@@ -373,7 +399,6 @@ def hsl_to_rgb(h, s, l):
 		
 		h=h/360
 	
-		
 		r =255* hue_to_rgb(var_1,var_2, h + 1.0/3)
 		g =255* hue_to_rgb(var_1,var_2, h)
 		b =255* hue_to_rgb(var_1,var_2,h - 1.0/3)
@@ -399,15 +424,44 @@ def hsl_to_rgb(h, s, l):
 	return "#"+r+g+b
 
 	
-	
+#Generates complementary color palette
+# in: h- hue
+# out: generated hue from h	
 def complementary(h):
 	return abs(h +180)
 
+	
+#Generates splitcomplementary color palette
+# in: h- hue
+# out: h1, h2 -generated hues from h
 def splitcomplementary(h):
 	h1 = abs(h +150-360)
 	h2 =abs(h +210-360)
 	return h1, h2
+	
+	
+#Generates triadic color palette
+# in: h- hue
+# out: h1, h2 -generated hues from h	
+def triadic(h):
+	h1 = abs(h +120-360)
+	h2 =abs(h +240-360)
+	return h1, h2
 
+	
+#Generates analogous color palette
+# in: h- hue
+# out: h1, h2, h3 -generated hues from h
+def analagous(h):
+	h1 = abs(h +30-360)
+	h2 =abs(h +60-360)
+	h3 =abs(h +90-360)	
+	return h1, h2,  h3
+
+
+#Analyzes the colors used and generates suggested color patterns
+# in: none
+# out: none 
 def colorProcess():
 	print "Analyzing the color palette..."
 	for c1 in range(len(colorlist)):
@@ -415,26 +469,31 @@ def colorProcess():
 		a, b, c = parsecolor(colorlist[c1])
 		
 		h, s, l = rgb_to_hsl(a,b,c)
-		print h , s , l 
+	#	print h , s , l 
 		hc = complementary(h)
 		cc = hsl_to_rgb(hc, s, l)
-		print cc
+	#	print cc
 		
 			
 		colorpalette.append(cc)
 		sc, sc2 = splitcomplementary(h)
 		
 		cc = hsl_to_rgb(sc, s, l)
-		print cc
+	#	print cc
 		
 		cc2 = hsl_to_rgb(sc2, s, l)
-		print cc2
+	#	print cc2
 		
 		colorpalette.append(cc)
 		colorpalette.append(cc2)
-		print "............."
-	
+
+
+
+#Parses CSS from a html file and then the rest of the file
+#in: none
+#out:none		
 def parseCSS():
+	print "Getting data..."
 	x= soup.find('style',{"type" : "text/css"})
 
 	if x!=None:
@@ -442,26 +501,28 @@ def parseCSS():
 		x=x.replace('</style>','')
 		x= x.replace('<style type="text/css">','')
 		sheet = cssutils.parseString(x)
-		print x
 		parseSheet(sheet)
-								
+		parseHTML()
+		findMysteryLink()
+		colorProcess()				
 
-parseCSS()
-
+		
+#Parses CSS file
+#in: none
+#out:none
 def parseCSSfile():
 	print "Getting data..."
-	#global sizecnt
-#	global under12
-#	global under16
+
 	parser = cssutils.CSSParser()
 	sheet = parser.parseFile(file, 'utf-8')
 
 	parseSheet(sheet)
-					
-							
+	colorProcess()
+	
 								
-parseCSSfile()			
-
+# Parses attributes for information
+# in: list of style attributes obtained with beautifulsoup
+# out: none; generates lists of information about fonts, colors etc
 def parseStyleAtrib(list):
 	for a in list: 
 		if a.has_attr('style'):
@@ -477,14 +538,13 @@ def parseStyleAtrib(list):
 							r= findInXML(i)
 							if [i,r] not in fl:
 								fl.append([i,r])
-					if "color" in s:
+					if "color" or "background-color" in s:
 					
 						r= s.split(":")[1]
-						print r
-						print len(r)
+						
 						r = normalizecolor(r)
 						if r not in colorlist:
-						
+							
 							if "#" in r:
 								
 								colorlist.append(r)
@@ -502,7 +562,11 @@ def parseStyleAtrib(list):
 							
 						if int(num[0]) < 13:
 							under12+=1
-
+							
+							
+#Parses html file, looks for info in different type of tags
+# in: none
+# out:none
 def parseHTML():
 	l = soup.findAll('a')
 	parseStyleAtrib(l)
@@ -515,8 +579,10 @@ def parseHTML():
 	l = soup.findAll('body')
 	parseStyleAtrib(l)
 			
-parseHTML()
-colorProcess()
+
+#Looks for "mistery meat" links in html files using keywords
+# in: none
+# out: none; generates a list of suspicious links
 def findMysteryLink():
 	print "Analyzing links..."
 	count =0
@@ -539,9 +605,10 @@ def findMysteryLink():
 					mlink.append([a["href"],a.text.strip()])
 
 
-findMysteryLink()
 
-
+# Generates the report on the given file in an Excel document
+# in: none
+# out: none
 def printReport():
 	cpcouner=0
 	
@@ -640,4 +707,11 @@ def printReport():
 		print "Close the opened report and run the script again"
 
 	
-printReport()
+if file.endswith(".css"):
+	parseCSSfile()
+	printReport()
+elif file.endswith(".html"):
+	parseCSS()
+	printReport()
+else: 
+	print "Please enter the path to a css/html file"
