@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Fonts>
+	 <Font name="Adobe Jenson"> </Font>
+      <Font name="Albertus" desirability = "4"></Font>
+      <Font name="Aldus" desirability = "4"></Font>
+      <Font name="Alexandria" desirability = "4"></Font>
+      <Font name="Algerian" desirability = "4"></Font>
+      <Font name="American Typewriter" desirability = "4"></Font>
+      <Font name="Antiqua" desirability = "4"></Font>
+      <Font name="Arno" desirability = "4"></Font>
+      <Font name="Aster" desirability = "4"></Font>
+      <Font name="Aurora" desirability = "4"></Font>
+      <Font name="News 706" desirability = "4"></Font>
+      <Font name="Baskerville" desirability = "4"></Font>
+      <Font name="Bell" desirability = "4"></Font>
+      <Font name="Belwe Roman" desirability = "4"></Font>
+      <Font name="Bembo" desirability = "4"></Font>
+      <Font name="Berkeley Old Style" desirability = "4"></Font>
+      <Font name="Bernhard Modern" desirability = "4"></Font>
+      <Font name="Bodoni" desirability = "4"></Font>
+      <Font name="Bauer Bodoni" desirability = "4"></Font>
+      <Font name="Bookman" desirability = "4"></Font>
+      <Font name="Bulmer" desirability = "4"></Font>
+      <Font name="Caledonia" desirability = "4"></Font>
+      <Font name="Californian FB" desirability = "4"></Font>
+      <Font name="Calisto MT" desirability = "4"></Font>
+      <Font name="Cambria" desirability = "4"></Font>
+      <Font name="Capitals" desirability = "4"></Font>
+      <Font name="Cartier" desirability = "4"></Font>
+      <Font name="Caslon" desirability = "4"></Font>
+      <Font name="Wyld" desirability = "4"></Font>
+      <Font name="Caslon Antique" desirability = "4"></Font>
+      <Font name="Catull" desirability = "4"></Font>
+      <Font name="Centaur" desirability = "4"></Font>
+      <Font name="Century Old Style" desirability = "4"></Font>
+      <Font name="Century Schoolbook" desirability = "4"></Font>
+      <Font name="New Century Schoolbook" desirability = "4"></Font>
+      <Font name="Century Schoolbook Infant" desirability = "4"></Font>
+      <Font name="Charis SIL" desirability = "4"></Font>
+      <Font name="Charter" desirability = "4"></Font>
+      <Font name="Cheltenham" desirability = "4"></Font>
+      <Font name="Clearface" desirability = "4"></Font>
+      <Font name="Cochin" desirability = "4"></Font>
+      <Font name="Colonna" desirability = "4"></Font>
+      <Font name="Computer Modern" desirability = "4"></Font>
+      <Font name="Concrete Roman" desirability = "4"></Font>
+      <Font name="Constantia" desirability = "4"></Font>
+      <Font name="Cooper Black" desirability = "4"></Font>
+      <Font name="Copperplate Gothic" desirability = "4"></Font>
+      <Font name="Corona" desirability = "4"></Font>
+      <Font name="News 705" desirability = "4"></Font>
+      <Font name="DejaVu Serif" desirability = "4"></Font>
+      <Font name="Didot" desirability = "4"></Font>
+      <Font name="Droid Serif" desirability = "4"></Font>
+      <Font name="Elephant" desirability = "4"></Font>
+      <Font name="Emerson" desirability = "4"></Font>
+      <Font name="Excelsior" desirability = "4"></Font>
+      <Font name="News 702" desirability = "4"></Font>
+      <Font name="Fairfield" desirability = "4"></Font>
+      <Font name="FF Scala" desirability = "4"></Font>
+      <Font name="Footlight" desirability = "4"></Font>
+      <Font name="FreeSerif" desirability = "4"></Font>
+      <Font name="Friz Quadrata" desirability = "4"></Font>
+      <Font name="Garamond" desirability = "4"></Font>
+      <Font name="Gentium" desirability = "4"></Font>
+      <Font name="Georgia" desirability = "4"></Font>
+      <Font name="Gloucester" desirability = "4"></Font>
+      <Font name="Goudy Old Style" desirability = "4"></Font>
+      <Font name="Granjon" desirability = "4"></Font>
+      <Font name="High Tower Text" desirability = "4"></Font>
+      <Font name="Hoefler Text" desirability = "4"></Font>
+      <Font name="IBM Plex Serif" desirability = "4"></Font>
+      <Font name="Imprint" desirability = "4"></Font>
+      <Font name="Ionic No. 5" desirability = "4"></Font>
+      <Font name="News 701" desirability = "4"></Font>
+      <Font name="ITC Benguiat" desirability = "4"></Font>
+      <Font name="Janson" desirability = "4"></Font>
+      <Font name="Jokerman" desirability = "4"></Font>
+      <Font name="Joanna" desirability = "4"></Font>
+      <Font name="Korinna" desirability = "4"></Font>
+      <Font name="Lexicon" desirability = "4"></Font>
+      <Font name="Liberation Serif" desirability = "4"></Font>
+      <Font name="Linux Libertine" desirability = "4"></Font>
+      <Font name="Literaturnaya" desirability = "4"></Font>
+      <Font name="Lucida Bright" desirability = "4"></Font>
+      <Font name="Melior" desirability = "4"></Font>
+      <Font name="Memphis" desirability = "4"></Font>
+      <Font name="Miller" desirability = "4"></Font>
+      <Font name="Minion" desirability = "4"></Font>
+      <Font name="Modern" desirability = "4"></Font>
+      <Font name="Mona Lisa" desirability = "4"></Font>
+      <Font name="Mrs Eaves" desirability = "4"></Font>
+      <Font name="MS Serif" desirability = "4"></Font>
+      <Font name="New York" desirability = "4"></Font>
+      <Font name="Nimbus Roman" desirability = "4"></Font>
+      <Font name="NPS Rawlinson Roadway" desirability = "4"></Font>
+      <Font name="OCR A Extended" desirability = "4"></Font>
+      <Font name="Palatino" desirability = "4"></Font>
+      <Font name="Book Antiqua" desirability = "4"></Font>
+      <Font name="Perpetua" desirability = "4"></Font>
+      <Font name="Plantin" desirability = "4"></Font>
+      <Font name="Playbill" desirability = "4"></Font>
+      <Font name="Primer" desirability = "4"></Font>
+      <Font name="Renault" desirability = "4"></Font>
+      <Font name="Requiem" desirability = "4"></Font>
+      <Font name="Rotis Serif" desirability = "4"></Font>
+      <Font name="Sabon" desirability = "4"></Font>
+      <Font name="Sistina" desirability = "4"></Font>
+      <Font name="Souvenir" desirability = "4"></Font>
+      <Font name="STIX" desirability = "4"></Font>
+      <Font name="Sylfaen" desirability = "4"></Font>
+      <Font name="Times New Roman" desirability = "4"></Font>
+      <Font name="Times" desirability = "4"></Font>
+      <Font name="Torino" desirability = "4"></Font>
+      <Font name="Trajan" desirability = "4"></Font>
+      <Font name="Trinite" desirability = "4"></Font>
+      <Font name="Trump Mediaeval" desirability = "4"></Font>
+      <Font name="Utopia" desirability = "4"></Font>
+      <Font name="Vera Serif" desirability = "4"></Font>
+      <Font name="Wide Latin" desirability = "4"></Font>
+      <Font name="Windsor" desirability = "4"></Font>
+      <Font name="XITS" desirability = "4"></Font>
+	  
+	  <Font name = "verdana" desirability = "5"></Font>
+    	<Font name = "serif" desirability = "5"></Font>
+	<Font name = "Arial" desirability = "5"></Font>
+</Fonts>
