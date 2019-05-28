@@ -172,14 +172,18 @@ fs=1
 lineh=11.5
 heights=[]
 fontsizes=[]
+firstchoiceoffonts=[]
 ratioviolation=0
 
 if len(sys.argv) < 2:
-	print "No file found. Exiting script"
+	print "Please give a css/html file as a parameter"
 	sys.exit()
 else:
 	file = 	sys.argv[1]
-	
+	if not(file.endswith(".css") or file.endswith(".html")):
+		print "Please give a css/html file as a parameter"
+		sys.exit()
+		
 try:
 	soup = BeautifulSoup(open(file), 'html.parser')	
 except:
@@ -258,12 +262,14 @@ def parseSheet(sheet):
 					if property.name == 'font-family':
 						
 						x = property.value.split(",")
-					
+						if x[0] not in firstchoiceoffonts:
+							firstchoiceoffonts.append(x[0])
 						for i in x:
 							i= i.lstrip()
 							i= i.replace('"', '')
 							i= i.replace('\'', '')
 							i=i.title()
+							
 							r= findInXML(i)
 							if [i,r] not in fl:
 								fl.append([i,r])
@@ -500,6 +506,7 @@ def colorProcess():
 		
 			
 		colorpalette.append(cc)
+		colorpalette.append("#")
 		sc, sc2 = splitcomplementary(h)
 		
 		cc = hsl_to_rgb(sc, s, l)
@@ -510,7 +517,7 @@ def colorProcess():
 		
 		colorpalette.append(cc)
 		colorpalette.append(cc2)
-		
+		colorpalette.append("#")
 		sc, sc2 = triadic(h)
 		
 		cc = hsl_to_rgb(sc, s, l)
@@ -520,7 +527,7 @@ def colorProcess():
 	#	print cc2
 		colorpalette.append(cc)
 		colorpalette.append(cc2)
-		
+		colorpalette.append("#")
 		sc, sc2, sc3 = analogous(h)
 		
 		cc = hsl_to_rgb(sc, s, l)
@@ -582,6 +589,8 @@ def parseStyleAtrib(list):
 				
 					s= s.split(":")
 					x = s[1].split(",")
+					if x[0] not in firstchoiceoffonts:
+						firstchoiceoffonts.append(x[0])
 					for i in x:
 						i= i.lstrip()
 						i= i.replace('"', '')
@@ -704,56 +713,43 @@ def printReport():
 	cell_format.set_bold(False)
 	#cell_format.set_font_color('red')
 	cell_format.set_font_size(15)
-	worksheet.write(row , 0, "Rating of the fonts used: ", cell_format)
+	worksheet.write(row , 0, "Ratings of the fonts used: ", cell_format)
 	row+=1
 	
 	cell_format_info = workbook.add_format()
 	cell_format_info.set_bold(True)
 	#cell_format.set_font_color('red')
 	cell_format_info.set_font_size(10)
-	worksheet.write(row , 0, "5")
+	worksheet.write_number(row , 0, 5)
 	worksheet.write(row , 1, "Most desirable(eg.serif)", cell_format_info)
 	row+=1
-	worksheet.write(row , 0, "4")
+	worksheet.write_number(row , 0, 4)
 	worksheet.write(row , 1, "Desirable(eg. Times New Roman)", cell_format_info)
 	row+=1
-	worksheet.write(row , 0, "3")
+	worksheet.write_number(row , 0, 3)
 	worksheet.write(row , 1, "Neutral", cell_format_info)
 	row+=1
-	worksheet.write(row , 0, "2")
+	worksheet.write_number(row , 0, 2)
 	worksheet.write(row , 1, "Generally illegible(eg. script fonts)", cell_format_info)
 	row+=1
-	worksheet.write(row , 0, "1")
+	worksheet.write_number(row , 0, 1)
 	worksheet.write(row , 1, "Not a font(eg. wingbats)", cell_format_info)
 	row+=1
-	worksheet.write(row , 0, "0")
+	worksheet.write_number(row , 0, 0)
 	worksheet.write(row , 1, "Not found in database", cell_format_info)
 	row+=2
 	
 	
 
 	for [item,n] in fl :
-		worksheet.write(row, 0, item) 
+		worksheet.write(row, 1, item) 
 	
-		worksheet.write_number(row, 1, int(n))
+		worksheet.write_number(row, 0, int(n))
 
 		row += 1
     
-	worksheet.write_formula(row,1, '=IFERROR(AVERAGEIF(B3:B%d,"<>0"),0)' % (row)) 
-	
-	row += 3
-
-	worksheet.write(row , 0, "Potential mistery meat links: ", cell_format)
-	row +=1
-	worksheet.write(row , 0, "Link")	
-	worksheet.write(row , 1, "Link name")
-	
-	row +=1
-	for [i,k] in mlink:
-		worksheet.write(row, 0, i) 
-		
-		worksheet.write(row, 1, k)
-		row +=1
+	if len(fl)!=0:
+		worksheet.write_formula(row,0, '=IFERROR(AVERAGEIF(A11:A%d,"<>0"),0)' % (row)) 
 	
 	row += 3
 	worksheet.write(row , 0, "Report on font size: ", cell_format)
@@ -767,18 +763,41 @@ def printReport():
 	worksheet.write(row , 1, "Classes with font-size under 16px" , cell_format)
 	worksheet.write(row, 0, str(under16)+"/"+ str(sizecnt))
 	row +=1
-	worksheet.write(row , 1, "Classes with font-size under 12px", cell_format)
+	worksheet.write(row , 1, "Classes with font-size under 13px", cell_format)
 	worksheet.write(row, 0, str(under12)+"/"+ str(sizecnt))
 	row +=2
 	
 	worksheet.write(row , 0, "The ratio between font size and line height should be around 1.5", cell_format_info)
 	row +=1
 	worksheet.write(row , 0, str(ratioviolation) + "/" + str(len(heights)) , cell_format)
-	worksheet.write(row , 1, "Number of rule violation (ratio not between 1.4 and 1.6)", cell_format)
+	worksheet.write(row , 1, "Number of rule violations (ratio not between 1.4 and 1.6)", cell_format)
 	
-	row+=1
+	row +=2
+	worksheet.write(row , 0, "There should be at most 3 font styles used at the same time", cell_format_info)
+	row +=1
+	worksheet.write(row , 1, "Number of fonts used", cell_format)
+	worksheet.write_number(row , 0, len(firstchoiceoffonts))
 	
+
 	row += 3
+	cell_format = workbook.add_format()
+
+	cell_format.set_font_size(15)
+	worksheet.write(row , 0, "Potential mistery meat links: ", cell_format)
+	row +=1
+	worksheet.write(row , 0, "Link")	
+	worksheet.write(row , 1, "Link name")
+	
+	row +=1
+	for [i,k] in mlink:
+		worksheet.write(row, 0, i) 
+		
+		worksheet.write(row, 1, k)
+		row +=1
+	
+
+	
+	row += 2
 	cell_format = workbook.add_format()
 
 	cell_format.set_font_size(15)
@@ -802,9 +821,11 @@ def printReport():
 		worksheet.write(row, 0, colorlist[k], cell_format)
 		cell_format = workbook.add_format()
 		
-		for j in range (0,8):
+		for j in range (0,11):
 			cell_format_cp = workbook.add_format()
-			
+			if(colorpalette[cpcouner+j]=="#"):
+				worksheet.set_column(2+j, 2+j, 4)
+				j+=1
 			cell_format_cp.set_bg_color(colorpalette[cpcouner+j])
 			if int(colorpalette[cpcouner+j][1:],16) >=0x7FFFFF:
 				cell_format_cp.set_font_color('black')
@@ -812,11 +833,13 @@ def printReport():
 				cell_format_cp.set_font_color('white')
 			worksheet.write(row, 2+j, colorpalette[cpcouner+j], cell_format_cp)
 		
-		cpcouner+=8
+		cpcouner+=11
 		
 		row+=1
+		
+	row+=1
 	if len(classes)!=0:
-		worksheet.write(row, 0, "There are " + str(len(classes))+ " css classes in this html file")
+		worksheet.write(row, 0, "There are " + str(len(classes))+ " css classes in this html file", cell_format_info)
 		row+=1
 		worksheet.write(row, 0, "If you don't find the information you are looking for, please run the script on the coresponding css file(s)",cell_format_info)
 		
@@ -827,17 +850,19 @@ def printReport():
 		print "Close the opened report and run the script again"
 
 
-		
-if file.endswith(".css"):
-	parseCSSfile()
-	processheights()
-	printReport()
+def main():		
+	if file.endswith(".css"):
+		parseCSSfile()
+		processheights()
+		printReport()
 
-elif file.endswith(".html"):
-	parseCSS()
-	processheights()
-	printReport()
+	elif file.endswith(".html"):
+		parseCSS()
+		processheights()
+		printReport()
 
-else: 
-	print "Please enter the path to a css/html file"
+	else: 
+		print "Please enter the path to a css/html file"
 
+if __name__== "__main__":
+	main()
