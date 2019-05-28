@@ -850,16 +850,116 @@ def printReport():
 		print "Close the opened report and run the script again"
 
 
+		
+# Generates the report on the given file in an Excel document (one line)
+# in: none
+# out: none
+def printReportSimple():
+	cpcouner=0
+	nrfont=0
+	suma=0
+	column=0
+	workbook = xlsxwriter.Workbook('ReportOverview.xlsx') 
+	
+	worksheet = workbook.add_worksheet('Report') 
+	
+	worksheet.write(0, 0, "Date: " + ctime())
+	worksheet.write(2, 0, "Report on file: " + sys.argv[1]) 
+	row = 2
+	
+	column+=3
+
+
+	for [item,n] in fl :
+		worksheet.write_number(row, column, int(n))
+		nrfont+=1
+		suma +=int(n)
+		column+=1
+		
+	if len(fl)!=0:
+		worksheet.write_number(row,column, float(suma)/nrfont) 
+		
+	column+=1
+	worksheet.write(row, column, str(under16)+"/"+ str(sizecnt))
+	column+=1
+	worksheet.write(row, column, str(under12)+"/"+ str(sizecnt))
+	column+=1
+	worksheet.write(row , column, str(ratioviolation) + "/" + str(len(heights)))
+	column+=1
+	worksheet.write_number(row , column, len(firstchoiceoffonts))
+	
+
+	column+=1
+	
+	worksheet.write_number(row , column, len(mlink))
+	
+	column+=1
+	worksheet.write_number(row , column, len(colorlist))
+	
+	
+	try:
+		workbook.close()
+		print "Report added"
+	except:
+		print "Close the opened report and run the script again"
+		
+		
+# Generates the report on the given file in a .txt document
+# in: none
+# out: none
+def printReportTXT():
+	line=""
+	cpcouner=0
+	nrfont=0
+	suma=0
+	column=0
+	file1 = open("reportAll.txt","a") 
+	
+	line +="Date: " + ctime() + "  "
+	
+	line += "File: " + sys.argv[1] + "  "
+
+	for [item,n] in fl :
+		line += "  "+str(int(n))+ "  "
+		nrfont+=1
+		suma +=int(n)
+		column+=1
+		
+	if len(fl)!=0:
+		line += "  "+str(float(suma)/nrfont)+ "  "
+		
+	line += "  "+ str(under16)+"/"+ str(sizecnt)+ "  "
+	
+	line += "  "+str(under12)+"/"+ str(sizecnt)+ "  "
+	
+	line += "  "+ str(ratioviolation) + "/" + str(len(heights))+ "  "
+	
+	line += "  "+ str(len(firstchoiceoffonts))+ "  "
+	
+
+	line += "  "+ str(len(mlink))+ "  "
+	
+	line += "  "+ str(len(colorlist))+ "  "
+
+	line +="\n"
+	file1.write(line) 
+	
+	file1.close() #to change file access modes 
+	
 def main():		
 	if file.endswith(".css"):
 		parseCSSfile()
 		processheights()
 		printReport()
-
+		#printReportSimple()
+		printReportTXT()
+		
 	elif file.endswith(".html"):
 		parseCSS()
 		processheights()
 		printReport()
+		#printReportSimple()
+		printReportTXT()
 
 	else: 
 		print "Please enter the path to a css/html file"
